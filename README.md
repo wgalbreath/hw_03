@@ -32,3 +32,15 @@ python3 ebay-dl.py "spanish textbooks"
 
 
 Here is a link to the [course project](https://github.com/mikeizbicki/cmc-csci040/tree/2021fall/hw_03).
+
+<br>
+<br>
+
+<b>Extra Credit</b>
+You can earn 2 points of extra credit if you complete the following tasks:
+
+Modify `ebay-dl.py` so that it accepts a new command line flag `--csv`. Whenever this flag is specified, the output file should be saved in csv format instead of json format.
+
+Generate 3 csv files in addition to the 3 json files, and include them in your repo.
+
+Modify your `README.md` file to include instructions and examples on how to use the `--csv` flag.
