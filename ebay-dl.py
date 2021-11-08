@@ -2,6 +2,7 @@ import argparse
 import requests
 from bs4 import BeautifulSoup
 import json
+import csv
 
 def parse_itemssold(text): # you don't have to create doctests to parse this, but it helps to isolate each example
     '''
@@ -56,7 +57,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Download information from ebay and convert to JSON.')
     parser.add_argument('search_term')
     parser.add_argument('--num_pages',default=10)
+    parser.add_argument('--csv', action='store_true')#type= argparse.FileType('w'), help="Prints the supplied argument as csv file") # WHAT ELSE DO I NEED TO ADD TO THIS?
     args = parser.parse_args()
+    print('args.csv=', args.csv)
     # print('args.search_term=',args.search_term)
 
     # list of all items found in all ebay webpages
@@ -65,7 +68,7 @@ if __name__ == '__main__':
     # loop over the ebay webpages
     for page_number in range(1,int(args.num_pages)+1):
         url = 'https://www.ebay.com/sch/i.html?_from=R40&_nkw=' + args.search_term + '&_sacat=11450&LH_TitleDesc=0&_pgn=' + str(page_number) + '&rt=nc'
-        print('url=', url)
+        # print('url=', url)
 
         # download the html
         r = requests.get(url)
@@ -126,15 +129,36 @@ if __name__ == '__main__':
                 'items_sold': items_sold,
             }
             items.append(item)
+        items = items[1:]
 
-        print('len(tags_items)=',len(tags_items))
-        print('len(items)=',len(items))
+        # print('len(tags_items)=',len(tags_items))
+        # print('len(items)=',len(items))
 
+    # if args.csv == True:
+    #     filename = args.search_term+'.csv'
+    #     with open(filename, 'w', encoding='ascii') as f:
+    #         outputWriter = csv.writer(f)
+    #         for item in items:
+    #             outputWriter.writerow(item) # f.write(str)
+            
+    if args.csv == True:
+        filename = args.search_term+'.csv'
+        columnames = ['name', 'price', 'status', 'shipping', 'free_returns', 'items_sold']
+        with open(filename, 'w', encoding='UTF-8', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=columnames)
+            # writer.writeheader()
+            # writer.writerows(f)
+            # outputWriter = csv.writer(f)
+            writer.writeheader()
+            writer.writerows(items)
+            # for item in items:
+            #     outputWriter.writerows(item) # f.write(str)
+            
 
-
-    # write  the json file FINISH
-    filename = args.search_term+'.json'
-    with open(filename, 'w', encoding='ascii') as f:
-        f.write(json.dumps(items))
+    else:
+        filename = args.search_term+'.json'
+        with open(filename, 'w', encoding='ascii') as f:
+            f.write(json.dumps(items))
+        
 
 
