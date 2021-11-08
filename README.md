@@ -1,6 +1,6 @@
 # HW_03 
 
-I collaborated with Ton and Sophia.
+For the two-day extension, I collaborated with Ton and Sophia.
 
 In this file, I will answer the following:
 <ol>
