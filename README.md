@@ -1,4 +1,7 @@
 # HW_03 
+
+I collaborated with Ton and Sophia.
+
 In this file, I will answer the following:
 <ol>
 <li> What your <code>ebay-dl.py</code> file does
