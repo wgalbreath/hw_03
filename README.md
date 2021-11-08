@@ -44,3 +44,5 @@ Modify `ebay-dl.py` so that it accepts a new command line flag `--csv`. Whenever
 Generate 3 csv files in addition to the 3 json files, and include them in your repo.
 
 Modify your `README.md` file to include instructions and examples on how to use the `--csv` flag.
+
+If you would like to generate a .csv file instead of a .json file, all you need to do in the terminal is add the `--csv` tag. So, for example, the command line will look like: `python3 ebay-dl.py "spanish textbooks" --csv`. On the other hand, if you just need a .json file, you do not have to add anything after the keyword you are scraping for (i.e. `python3 ebay-dl.py "spanish textbooks"`)
